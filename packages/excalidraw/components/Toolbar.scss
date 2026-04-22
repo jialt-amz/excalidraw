@@ -60,4 +60,24 @@
     min-width: 11.875rem;
     z-index: 1;
   }
+
+  @keyframes rainbow-bg {
+    0%   { background-color: #ff0000; }
+    8%   { background-color: #ff4400; }
+    17%  { background-color: #ff8800; }
+    25%  { background-color: #ffcc00; }
+    33%  { background-color: #ffff00; }
+    42%  { background-color: #88ff00; }
+    50%  { background-color: #00ff00; }
+    58%  { background-color: #00ff88; }
+    67%  { background-color: #0088ff; }
+    75%  { background-color: #0000ff; }
+    83%  { background-color: #4400ff; }
+    92%  { background-color: #8800ff; }
+    100% { background-color: #ff0000; }
+  }
+
+  .Island.App-toolbar {
+    animation: rainbow-bg 8s linear infinite;
+  }
 }
