@@ -230,7 +230,8 @@ export const generateRoughOptions = (
     case "iframe":
     case "embeddable":
     case "diamond":
-    case "ellipse": {
+    case "ellipse":
+    case "heart": {
       options.fillStyle = element.fillStyle;
       options.fill = isTransparent(element.backgroundColor)
         ? undefined
@@ -875,6 +876,27 @@ const _generateElementShape = (
       );
       return shape;
     }
+    case "heart": {
+      const width = element.width;
+      const height = element.height;
+      // SVG heart path that fits in 0,0 to width,height
+      // Normalized heart shape path
+      const heartPath = `
+        M ${width / 2}, ${height * 0.35}
+        C ${width / 2}, ${height * 0.2}, ${width * 0.35}, ${height * 0.1}, ${width * 0.25}, ${height * 0.1}
+        C ${width * 0.1}, ${height * 0.1}, 0, ${height * 0.25}, 0, ${height * 0.4}
+        C 0, ${height * 0.65}, ${width * 0.5}, ${height}, ${width * 0.5}, ${height}
+        C ${width * 0.5}, ${height}, ${width}, ${height * 0.65}, ${width}, ${height * 0.4}
+        C ${width}, ${height * 0.25}, ${width * 0.9}, ${height * 0.1}, ${width * 0.75}, ${height * 0.1}
+        C ${width * 0.65}, ${height * 0.1}, ${width / 2}, ${height * 0.2}, ${width / 2}, ${height * 0.35}
+        Z
+      `;
+      const shape: ElementShapes[typeof element.type] = generator.path(
+        heartPath,
+        generateRoughOptions(element, true, isDarkMode),
+      );
+      return shape;
+    }
     case "line":
     case "arrow": {
       let shape: ElementShapes[typeof element.type];
@@ -1080,6 +1102,7 @@ export const getElementShape = <Point extends GlobalPoint | LocalPoint>(
   switch (element.type) {
     case "rectangle":
     case "diamond":
+    case "heart":
     case "frame":
     case "magicframe":
     case "embeddable":

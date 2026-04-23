@@ -42,6 +42,7 @@ export const distanceToElement = (
     case "magicframe":
       return distanceToRectanguloidElement(element, elementsMap, p);
     case "diamond":
+    case "heart":
       return distanceToDiamondElement(element, elementsMap, p);
     case "ellipse":
       return distanceToEllipseElement(element, elementsMap, p);

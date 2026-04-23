@@ -459,6 +459,7 @@ export const intersectElementWithLineSegment = (
         onlyFirst,
       );
     case "diamond":
+    case "heart":
       return intersectDiamondWithLineSegment(
         element,
         elementsMap,
